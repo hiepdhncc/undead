@@ -1,0 +1,15 @@
+export const characterType = 'character-type';
+export const character = 'character';
+export const userCharacter = 'user-character';
+export const itemType = 'item-type';
+export const item = 'item';
+export const resource = 'resource';
+export const reward = 'reward';
+export const rewardResource = 'reward-resource';
+export const userResource = 'user-resource';
+export const userReward = 'user-reward';
+export const weaponType = 'weapon-type';
+export const weapon = 'weapon';
+export const ammo = 'ammo';
+export const userWeapon = 'user-weapon';
+export const weaponLevel = 'weapon-level';

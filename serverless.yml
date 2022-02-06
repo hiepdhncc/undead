@@ -1,0 +1,63 @@
+service: serverlessSetup
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: ap-southeast-1
+
+# functions
+functions:
+  characterTypes:
+    handler: src/functions/characterTypes.handler
+    events: # The events that trigger this function
+      - http:
+          path: serverlessSetup/character-types
+          method: get
+  characterType:
+    handler: src/functions/characterType.handler
+    events: # The events that trigger this function
+      - http:
+          path: serverlessSetup/character-type
+          method: get
+      - http:
+          path: serverlessSetup/character-type
+          method: post
+      - http:
+          path: serverlessSetup/character-type
+          method: patch
+      - http:
+          path: serverlessSetup/character-type
+          method: delete
+  # goodbye:
+  #   handler: src/functions/goodbye.handler
+  #   events:
+  #     - http:
+  #         path: serverlessSetup/goodbye
+  #         method: post
+  # question:
+  #   handler: src/functions/question.handler
+  #   dependsOn: SNSHelloEvent
+  #   events:
+  #     - sns:
+  #         arn: !Ref SNSHelloEvent
+  #         topicName: hello-event
+
+# Serverless plugins
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
+
+# Resources your functions use
+resources:
+  Resources:
+    # SNS Topics
+    SNSHelloEvent:
+      Type: AWS::SNS::Topic
+      Properties:
+        DisplayName: Hello Event Topic
+        TopicName: hello-event
+    # SQS Queues
+    Queue:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: Undead Queue
